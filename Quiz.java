@@ -1,5 +1,24 @@
 import java.util.*;
-class Quiz
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.io.FileWriter;
+import java.io.IOException;
+import Rushikesh1.*;
+
+class Help
+{
+    public void help()
+    {
+        System.out.println("###########################################################");
+        System.out.println("Welcome to Quiz Game Help Pannel");
+        System.out.println("Rule of Quiz Game are:");
+        System.out.println("1\t: Press User Name and Password for Login\n"+"2\t: After login Enter your Choice\n"+"\t\tPress 1 to start Quiz\n"+"\t\tPress 2 for Developer Information\n"+"\t\tPress 3 for Help\n");
+        System.out.println("In this Quiz Game I have Provide Two Raund\n"+"In First raund there are 5 Quesion ask\n"+"In this 5 Quesion Every Correct Answer you can Earn 2 coin\n"+"To win the first raund we are required to correct at least 4 answer\n"+" otherwise we can't access second raund of Quiz Game\n");
+        System.out.println("Same for Second Raund every Correct answer we can Earn 2 coin");
+        System.out.println("###########################################################");
+    }
+}
+public class Quiz 
 {
      static char A,B,C,D;
      static int coin=0,icnt=0;
@@ -25,7 +44,6 @@ class Quiz
             icnt++;
             earn=coin+coin;
             
-
             System.out.println("You Are Earn coin in:"+""+earn);
         }
         else
@@ -97,9 +115,24 @@ class Quiz
             System.out.println("Answer is not Correct");
             System.out.println("You Are Earn coin in:"+""+earn);
         }
+        ///////File Writing Code/////////////////////////////////////
+        try{
+            FileWriter myWriter=new FileWriter("Score1.txt");
+            myWriter.write("Your First Raund Quiz Score is:"+earn);
+            myWriter.close();
+            System.out.println("Sucessfully Write file");
+        }
+        catch(IOException e)
+        {
+            System.out.println("An error occured");
+            e.printStackTrace();
+        }
+            
+        
         System.out.println("------------------End Quiz First Raund---------------------------");
        
     }
+    
     public static void SeccondRound()
     {
         icnt=0;
@@ -265,9 +298,10 @@ class Quiz
             {
                 System.out.println("Your Answer Is Wrong");
             }
-
+            
             
         }
+        
         else if(s==1)
         {
             System.out.println("...............Exit Game.........................................\n");
@@ -280,27 +314,57 @@ class Quiz
     }
     public static void main(String args[]) 
     {
-        int a,b;
-        a=1;
-        System.out.println("Welcome to Quiz Game");
-        System.out.println("In This Quiz There are Total 5 Quesion\n"+"Please Press 1 To start The Quiz First Raund\n");
-        Scanner sc=new Scanner(System.in);
-        Quiz QFR=new Quiz();
-        b=sc.nextInt();
-        if(a==1)
+        int Choice=0;
+        System.out.println("Help for Login Quiz Game\t:\n"+"User Name : Enter any Name\n"+"Password : Press Any Password But follow bellow Contain\n"+"1\t:use At least One capital letter\n"+"2\t:One Small letter\n"+"3\t:One Special Character\n"+"4\t:One or more Digit\n");
+        Scanner sc1 = new Scanner(System.in);
+        System.out.println("Enter User Name: ");
+        String user = sc1.next();
+        System.out.println("Enter Password: ");
+        String pass = sc1.next();
+        String regex = "^(?=.*[0-9])"+ "(?=.*[a-z])(?=.*[A-Z])"+ "(?=.*[@#$%^&+=])"+ "(?=\\S+$).{8,20}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(pass);
+        if(matcher.matches())
         {
-            QFR.QuizFirstRaund();
+             System.out.println("Valid Password");
+             int a,b;
+            a=0;
+            System.out.println("Welcome to Quiz Game");
+            System.out.println("In This Quiz There are Total 5 Quesion\n"+"Please Press 1 To start Quiz Game\n"+"Press 2 For Developer Information\n"+"Press 3 For Help\n");
+            Scanner sc=new Scanner(System.in);
+            Quiz QFR=new Quiz();
+            Demo1 pobj=new Demo1(); //create Quiz class Object
+            DeveloperInfo dobj=new DeveloperInfo();//create Rushikesh1 Package Object to use package Contain
+            Help hobj=new Help(); // create help class object
+            a=sc.nextInt();
+            if(a==1)
+            {
+                QFR.QuizFirstRaund();
+            }
+            if(icnt>=4)
+            {
+                System.out.println("You are win First Round");
+                QFR.SeccondRound();
+            }
+            if(icnt>=3)
+            {
+                QFR.Exit();
+            }
+            if(a==2)
+            {
+                dobj.Info();    //call Developer information method in the Rushikesh1 Package
+            }
+            if(a==3)
+            {
+                hobj.help(); // calling help method
+            }
+                
         }
-        if(icnt>=4)
+        else
         {
-            System.out.println("You are win First Round");
-            QFR.SeccondRound();
+            System.out.println("Password IS INVALID");
         }
-        if(icnt>=3)
-        {
-            QFR.Exit();
-        }
-             
+        
         
     }
 }
