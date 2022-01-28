@@ -19,3 +19,15 @@ password should be any one capital latter,small later, digit and special charact
 #after Login 
 
 ![after login](https://user-images.githubusercontent.com/61877894/151578616-c3e57a5f-a7cf-44f0-a62d-96a876b5ae68.PNG)
+
+# Start Quiz Screen
+
+![start quiz](https://user-images.githubusercontent.com/61877894/151583602-61a8f606-32fb-490f-ad47-7fd57fcff14d.PNG)
+
+#Help Quiz
+
+![help](https://user-images.githubusercontent.com/61877894/151583656-c38fdb32-bea2-4bb6-a243-20ae771e07c6.PNG)
+
+# Developer Info Screen. Developer info imported from Rushikesh1 package.
+
+![developer info](https://user-images.githubusercontent.com/61877894/151583833-0e10b168-1c71-438e-b240-593e73b1548d.PNG)
